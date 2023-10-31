@@ -122,6 +122,17 @@ class NotesScreen extends StatefulWidget {
 
 class _NotesScreenState extends State<NotesScreen> {
   List<String> notes = [];
+  bool isAdding = false;
+  TextEditingController textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Load the notes from the database.
+    // ...
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,24 +196,32 @@ class _NotesScreenState extends State<NotesScreen> {
                         children: [
                           Expanded(
                             child: TextField(
-                              onChanged: (value) {},
-                              onSubmitted: (value) {
-                                if (value.isNotEmpty) {
-                                  setState(() {
-                                    notes.add(value);
-                                  });
-                                }
-                              },
+                              controller: textController,
                               decoration:
                               const InputDecoration(hintText: "Add a note"),
                             ),
                           ),
                           IconButton(
                             icon: const Icon(Icons.add),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                isAdding = true;
+                              });
+                            },
                           )
                         ],
                       ),
+                      if (isAdding)
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              notes.add(textController.text);
+                              textController.clear();
+                              isAdding = true;
+                            });
+                          },
+                          child: const Text("Add Note"),
+                        ),
                     ],
                   ),
                 )

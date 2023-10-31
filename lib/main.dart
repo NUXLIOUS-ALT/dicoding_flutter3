@@ -59,12 +59,18 @@ class LoginForm extends StatelessWidget {
           builder: (context, constraints) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
+
               children: [
-                const Row(
+                Column(
                   children: [
-                    Text(
-                      "Username",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                    Image.asset("images/nomad-work.png"),
+                    const Row(
+                      children: [
+                        Text(
+                          "Username",
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -128,9 +134,6 @@ class _NotesScreenState extends State<NotesScreen> {
   @override
   void initState() {
     super.initState();
-
-    // Load the notes from the database.
-    // ...
   }
 
   @override
